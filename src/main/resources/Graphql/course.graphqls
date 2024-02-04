@@ -1,0 +1,12 @@
+type Query{
+    courses:[Course]
+    course(id:ID):Course !
+}
+type Mutation{
+    newCourse(course:CourseInput!):Course
+}
+input CourseInput{
+    course_id:ID !
+    name: String!   
+
+}
