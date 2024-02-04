@@ -1,9 +1,4 @@
-FROM postgres
-
-ENV POSTGRES_DB gil-db
-ENV POSTGRES_PASSWORD postgres
-
-COPY schema.sql /docker-entrypoint-initdb.d/
-COPY data.sql /docker-entrypoint-initdb.d/
-
-EXPOSE 5432
+FROM openjdk:17
+ARG JAR_FILE=target/gil-*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
