@@ -10,3 +10,17 @@ input CourseInput{
     name: String!   
 
 }
+
+type Course{
+    course_id: ID!
+    name: String!
+    description: String!
+    price: Int!
+    capacities: Int!
+    course_type : CourseType
+    course_language:CourseLanguage
+}
+
+type CourseType{
+
+}
