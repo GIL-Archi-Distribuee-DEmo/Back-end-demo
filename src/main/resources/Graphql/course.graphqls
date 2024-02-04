@@ -1,14 +1,18 @@
 type Query{
-    courses:[Course]
-    course(id:ID):Course !
+    courses:[Course]!
+    courseById(course_id:ID):Course!
+    courseByName(name:String):[Course]!
 }
 type Mutation{
     newCourse(course:CourseInput!):Course
 }
 input CourseInput{
-    course_id:ID !
-    name: String!   
-
+    name: String!
+    description: String!
+    price: Int!
+    capacities: Int!
+    course_type : CourseType
+    course_language:CourseLanguage
 }
 
 type Course{
@@ -21,6 +25,19 @@ type Course{
     course_language:CourseLanguage
 }
 
-type CourseType{
+enum CourseType {
+    BACHELOR_DEGREE
+    MASTER_DEGREE
+    PHD_DOCTORATE
+    CROSS_FACULTY_GRADUATE_RESEARCH
+    LANGUAGE_COURSES
+    SHORT_COURSES
+}
 
+
+
+enum CourseLanguage{
+    FRENCH
+ENGLISH
+ENGLISH_AND_FRENCH
 }

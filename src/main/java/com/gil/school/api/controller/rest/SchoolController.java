@@ -1,4 +1,4 @@
-package com.gil.school.api.controller;
+package com.gil.school.api.controller.rest;
 
 
 import com.gil.school.api.model.Course;

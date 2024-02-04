@@ -1,0 +1,15 @@
+input schoolInput{
+    name: String!
+    location_school: String!
+    website: String!
+    description: String!
+
+}
+
+type School{
+school_id :ID!
+name: String!
+location_school: String!
+website: String!
+description: String!
+}
