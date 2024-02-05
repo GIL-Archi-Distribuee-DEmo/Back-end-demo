@@ -4,7 +4,7 @@ type Query{
     courseByName(name:String):[Course]!
 }
 type Mutation{
-    newCourse(course:CourseInput!):Course
+    addCourse(course:CourseInput!):Course
 }
 input CourseInput{
     name: String!
@@ -38,6 +38,6 @@ enum CourseType {
 
 enum CourseLanguage{
     FRENCH
-ENGLISH
-ENGLISH_AND_FRENCH
+    ENGLISH
+    ENGLISH_AND_FRENCH
 }

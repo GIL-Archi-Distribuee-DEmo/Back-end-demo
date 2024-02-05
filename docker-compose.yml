@@ -4,7 +4,7 @@ services:
   app:
     image: 'gil:latest'
     build:
-      context: ../../Desktop/Etech/back-gil
+      context: ../../Desktop/G
     container_name: app
     depends_on:
       - db

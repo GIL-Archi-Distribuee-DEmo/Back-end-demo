@@ -2,7 +2,10 @@
 spring:
   profiles:
     active: "h2"
-
+  graphql:
+    schema:
+      printer:
+        enabled: true
 # swagger-ui custom path
 springdoc:
   swagger-ui:
@@ -12,6 +15,7 @@ springdoc:
       path: /api-docs
 # Server port
 server:
-  port: 8081
+  port: 8082
   servlet:
     context-path: /gil-api
+
