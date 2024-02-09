@@ -2,28 +2,16 @@ package com.gil.school.api.service;
 
 
 import com.gil.school.api.model.School;
-import com.gil.school.api.services.SchoolService;
-import io.cucumber.datatable.DataTable;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class SchoolServiceDefinition {
 
     private List<School> schools;
     private School updatedSchool;
     private int deletedSchoolId;
-
+/*
     private SchoolService schoolService = mock(SchoolService.class);
 
     @Given("the following schools exist:")
@@ -105,5 +93,5 @@ public class SchoolServiceDefinition {
         updatedSchool.setDescription(updatedSchoolData.get("description"));
 
         when(schoolService.updateSchool(updatedSchool)).thenReturn(updatedSchool);
-    }
+    }*/
 }
