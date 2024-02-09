@@ -27,7 +27,7 @@ Feature: School Service Testing
       | name        | location_school     | website                | description          |
       | New School  | 45.0000,-90.0000    | http://www.newschool.com| New School Description |
 
-  Scenario: Update School Information
+  Scenario: Update School InCourse
     When I update the school with ID 1 with the following details:
       | name        | location_school     | website                | description          |
       | Updated School | 50.0000,-85.0000 | http://www.updatedschool.com| Updated School Description |

@@ -44,7 +44,7 @@ public class CourseController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateCourse(@PathVariable Long id, @RequestBody Course updateCourse) {
-        // Set the ID of the updated formation to match the path variable
+        // Set the ID of the updated Course to match the path variable
         updateCourse.setCourse_id(id);
 
         try {
@@ -61,10 +61,10 @@ public class CourseController {
     }
 
     @GetMapping("/name")
-    public List<Course> getFormationByName(
+    public List<Course> getCourseByName(
             @RequestParam("name") String name
     ) {
-        return courseService.findFormationByName(name);
+        return courseService.findCourseByName(name);
     }
 
     @PatchMapping("/{id}")
@@ -83,8 +83,8 @@ public class CourseController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCourse(@PathVariable Long id) {
         try {
-            courseService.deleteFormation(id);
-            return ResponseEntity.ok("Formation with ID " + id + " deleted successfully.");
+            courseService.deleteCourse(id);
+            return ResponseEntity.ok("Course with ID " + id + " deleted successfully.");
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (Exception e) {
@@ -100,7 +100,7 @@ public class CourseController {
         if (schools.isEmpty()) {
             return ResponseEntity.noContent().build(); // Return 204 No Content if no  found
         } else {
-            return ResponseEntity.ok(schools); // Return 200 OK with formations
+            return ResponseEntity.ok(schools); // Return 200 OK with Courses
         }
     }
 }

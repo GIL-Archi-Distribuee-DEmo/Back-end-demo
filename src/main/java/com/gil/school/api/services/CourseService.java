@@ -25,47 +25,47 @@ public class CourseService {
         return courseList;
     }
 
-            public Optional<Course> getACourse(Long idFormation) {
-                return courseRepository.findById(idFormation);
+            public Optional<Course> getACourse(Long idCourse) {
+                return courseRepository.findById(idCourse);
             }
 
     public Course updateCourse(Course updatedCourse) {
-        Long formationId = updatedCourse.getCourse_id();
-        if (formationId != null && courseRepository.existsById(formationId)) {
+        Long CourseId = updatedCourse.getCourse_id();
+        if (CourseId != null && courseRepository.existsById(CourseId)) {
             return courseRepository.save(updatedCourse);
         } else {
-            throw new EntityNotFoundException("Formation not found");
+            throw new EntityNotFoundException("Course not found");
         }
     }
 
     public Course updatPartialCourse(Long id, Course updatedCourse) {
         return courseRepository.findById(id)
-                .map(existingFormation -> {
-                    if (updatedCourse.getName() != null) existingFormation.setName(updatedCourse.getName());
+                .map(existingCourse -> {
+                    if (updatedCourse.getName() != null) existingCourse.setName(updatedCourse.getName());
                     if (updatedCourse.getCapacities() != null)
-                        existingFormation.setCapacities(updatedCourse.getCapacities());
-                    if (updatedCourse.getPrice() != null) existingFormation.setPrice(updatedCourse.getPrice());
+                        existingCourse.setCapacities(updatedCourse.getCapacities());
+                    if (updatedCourse.getPrice() != null) existingCourse.setPrice(updatedCourse.getPrice());
                     if (updatedCourse.getDescription() != null)
-                        existingFormation.setDescription(updatedCourse.getDescription());
+                        existingCourse.setDescription(updatedCourse.getDescription());
                     if (updatedCourse.getSchools() != null)
-                        existingFormation.setSchools(updatedCourse.getSchools());
-                    return courseRepository.save(existingFormation);
-                }).orElseThrow(() -> new EntityNotFoundException("Formation not found"));
+                        existingCourse.setSchools(updatedCourse.getSchools());
+                    return courseRepository.save(existingCourse);
+                }).orElseThrow(() -> new EntityNotFoundException("Course not found"));
     }
 
-    public List<Course> findFormationByName(String name) {
+    public List<Course> findCourseByName(String name) {
         return courseRepository.findByName(name);
     }
 
 
-    public void deleteFormation(Long id) {
-        Optional<Course> formationOptional = courseRepository.findById(id);
+    public void deleteCourse(Long id) {
+        Optional<Course> CourseOptional = courseRepository.findById(id);
 
-        if (formationOptional.isPresent()) {
-            Course course = formationOptional.get();
+        if (CourseOptional.isPresent()) {
+            Course course = CourseOptional.get();
             courseRepository.delete(course);
         } else {
-            throw new EntityNotFoundException("Formation with ID " + id + " not found");
+            throw new EntityNotFoundException("Course with ID " + id + " not found");
         }
     }
 

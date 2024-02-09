@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+package com.gil.school.api;
+
+// Course-related definitions
+message Course {
+  int64 course_id = 1;
+  string name = 2;
+  string description = 3;
+  double price = 4;
+  int32 capacities = 5;
+  CourseLanguage course_language = 6;
+  CourseType course_type = 7;
+}
+
+// Enumeration definitions
+message CourseLanguage {
+  enum Language {
+    FRENCH = 0;
+    ENGLISH = 1;
+    ENGLISH_AND_FRENCH = 2;
+  }
+}
+
+message CourseType {
+  enum Type {
+    BACHELOR_DEGREE = 0;
+    MASTER_DEGREE = 1;
+    PHD_DOCTORATE = 2;
+    CROSS_FACULTY_GRADUATE_RESEARCH = 3;
+    LANGUAGE_COURSES = 4;
+    SHORT_COURSES = 5;
+  }
+}
+
+// Service definitions
+service CourseService {
+  rpc SaveCourse(Course) returns (Course);
+  rpc GetAllCourses(Empty) returns (CourseList);
+  rpc GetACourseById(IdRequest) returns (Course);
+  rpc UpdateCourse(Course) returns (Course);
+  rpc UpdatePartialCourse(UpdatePartialCourseRequest) returns (Course);
+  rpc FindCoursesByName(NameRequest) returns (CourseList);
+  rpc DeleteCourseById(IdRequest) returns (Empty);
+  rpc FindSchoolsByCourseId(IdRequest) returns (SchoolList);
+}
+
+message CourseList {
+  repeated Course courses = 1;
+}
+
+message IdRequest {
+  int64 id = 1;
+}
+
+message UpdatePartialCourseRequest {
+  int64 id = 1;
+  Course updated_course = 2;
+}
+
+message NameRequest {
+  string name = 1;
+}
+
+message Empty {}
+
+message School {
+  // Define the fields of the School object as needed
+}
+
+message SchoolList {
+  repeated School schools = 1;
+}
+

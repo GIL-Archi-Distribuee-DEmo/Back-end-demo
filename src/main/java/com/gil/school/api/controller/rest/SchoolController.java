@@ -27,7 +27,7 @@ public class SchoolController {
 
 
     @GetMapping("")
-    @Operation(summary = "Get All School present in the dataBase", description = "Returns All School Present without the associate formation .")
+    @Operation(summary = "Get All School present in the dataBase", description = "Returns All School Present without the associate Course .")
     public List<School> getAllScool(){
         return schoolService.getAllSchool() ;
     }
@@ -92,12 +92,12 @@ public class SchoolController {
     @GetMapping("/{schoolId}/courses")
     @Operation(summary = "Get All Courses  inside a school ", description = "Returns  the school ..")
     public ResponseEntity<Set<Course>> getCoursesBySchoolId(@PathVariable Long schoolId) {
-        Set<Course> courses = schoolService.findFormationsBySchoolId(schoolId);
+        Set<Course> courses = schoolService.findCoursesBySchoolId(schoolId);
 
         if (courses.isEmpty()) {
-            return ResponseEntity.noContent().build(); // Return 204 No Content if no formations found
+            return ResponseEntity.noContent().build(); // Return 204 No Content if no Courses found
         } else {
-            return ResponseEntity.ok(courses); // Return 200 OK with formations
+            return ResponseEntity.ok(courses); // Return 200 OK with Courses
         }
     }
 

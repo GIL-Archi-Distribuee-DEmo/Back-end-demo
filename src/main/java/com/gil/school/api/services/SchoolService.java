@@ -71,7 +71,7 @@ public class SchoolService {
             throw new EntityNotFoundException("School with ID " + id + " not found");
         }
     }
-    public Set<Course> findFormationsBySchoolId(Long schoolId) {
+    public Set<Course> findCoursesBySchoolId(Long schoolId) {
         Optional<School> schoolOptional = schoolRepository.findById(schoolId);
 
         return schoolOptional.map(School::getCourses).orElse(Collections.emptySet());

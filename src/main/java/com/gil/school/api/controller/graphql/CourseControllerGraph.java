@@ -27,6 +27,6 @@ public class CourseControllerGraph {
 
     @QueryMapping
     public List<Course>courseByName(@Argument String name){
-        return this.courseService.findFormationByName(name);
+        return this.courseService.findCourseByName(name);
     }
 }
