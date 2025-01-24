@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Validators.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gil</a> &gt; <a href="index.source.html" class="el_package">com.gil.school.api.model.Validators</a> &gt; <span class="el_source">Validators.java</span></div><h1>Validators.java</h1><pre class="source lang-java linenums">package com.gil.school.api.model.Validators;
+
+import jakarta.validation.Constraint;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
+import jakarta.validation.Payload;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+<span class="nc" id="L24">public class Validators {</span>
+
+    // Custom validation annotation
+    @Target({ElementType.FIELD})
+    @Retention(RetentionPolicy.RUNTIME)
+    @Constraint(validatedBy = WebsiteURLValidator.class)
+    public @interface ValidWebsiteURL {
+        String message() default &quot;Invalid website URL&quot;;
+        Class&lt;?&gt;[] groups() default {};
+        Class&lt;? extends Payload&gt;[] payload() default {}; // Here you define payload()
+    }
+
+    // Custom validator class
+<span class="fc" id="L37">    public static class WebsiteURLValidator implements ConstraintValidator&lt;ValidWebsiteURL, String&gt; {</span>
+        private static final String URL_REGEX = &quot;^(https?|ftp)://[^\s/$.?#].[^\s]*$&quot;;
+
+        @Override
+<span class="fc" id="L41">        public void initialize(ValidWebsiteURL constraintAnnotation) {}</span>
+
+        @Override
+        public boolean isValid(String value, ConstraintValidatorContext context) {
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">            if (value == null) {</span>
+<span class="nc" id="L46">                return true; // null values are considered valid</span>
+            }
+
+<span class="fc" id="L49">            Pattern pattern = Pattern.compile(URL_REGEX);</span>
+<span class="fc" id="L50">            Matcher matcher = pattern.matcher(value);</span>
+<span class="fc" id="L51">            return matcher.matches();</span>
+        }
+    }
+
+
+    // Location
+
+
+
+
+    @Target({ElementType.FIELD, ElementType.TYPE})
+    @Retention(RetentionPolicy.RUNTIME)
+    @Constraint(validatedBy = ValidLocationValidator.class)
+    public @interface ValidLocation {
+        String message() default &quot;Invalid location coordinates&quot;;
+        Class&lt;?&gt;[] groups() default {};
+        Class&lt;? extends Payload&gt;[] payload() default {};
+    }
+
+
+<span class="fc" id="L71">    public static class ValidLocationValidator implements ConstraintValidator&lt;ValidLocation, String&gt; {</span>
+
+        @Override
+        public void initialize(ValidLocation constraintAnnotation) {
+<span class="fc" id="L75">        }</span>
+
+        @Override
+        public boolean isValid(String location_school, ConstraintValidatorContext context) {
+<span class="fc" id="L79">            String location = location_school;</span>
+
+<span class="fc bfc" id="L81" title="All 2 branches covered.">            if (isValidCoordinates(location)) {</span>
+<span class="fc" id="L82">                return true;</span>
+            } else {
+<span class="fc" id="L84">                return false;</span>
+            }
+        }
+
+        private boolean isValidCoordinates(String location) {
+            // Split the combined location string into latitude and longitude
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">            if( location!=null){</span>
+<span class="fc" id="L91">            String[] coordinates = location.split(&quot;,&quot;);</span>
+
+<span class="fc bfc" id="L93" title="All 2 branches covered.">            if (coordinates.length != 2) {</span>
+<span class="fc" id="L94">                return false; // Invalid format, not exactly two coordinates</span>
+            }
+
+            try {
+<span class="fc" id="L98">                double latitude = Double.parseDouble(coordinates[0]);</span>
+<span class="fc" id="L99">                double longitude = Double.parseDouble(coordinates[1]);</span>
+
+                // Perform reverse geocoding using Nominatim API
+<span class="fc" id="L102">                String nominatimApiUrl = &quot;https://nominatim.openstreetmap.org/reverse?format=json&amp;lat=&quot; + latitude + &quot;&amp;lon=&quot; + longitude;</span>
+<span class="fc" id="L103">                CloseableHttpClient httpClient = HttpClients.createDefault();</span>
+<span class="fc" id="L104">                HttpGet httpGet = new HttpGet(nominatimApiUrl);</span>
+<span class="fc" id="L105">                HttpResponse response = httpClient.execute(httpGet);</span>
+<span class="fc" id="L106">                HttpEntity entity = response.getEntity();</span>
+
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">                if (entity != null) {</span>
+<span class="fc" id="L109">                    String responseBody = EntityUtils.toString(entity);</span>
+<span class="fc" id="L110">                    JSONObject jsonObject = new JSONObject(responseBody);</span>
+
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">                    if (jsonObject.has(&quot;display_name&quot;)) {</span>
+<span class="fc" id="L113">                        return true; // The location is valid and exists in the real world</span>
+                    }
+                }
+<span class="nc" id="L116">            } catch (NumberFormatException | IOException e) {</span>
+<span class="nc" id="L117">                e.printStackTrace();</span>
+<span class="nc" id="L118">            } catch (JSONException e) {</span>
+<span class="nc" id="L119">                throw new RuntimeException(e);</span>
+<span class="nc" id="L120">            }}</span>
+
+<span class="nc" id="L122">            return false; // The location is not valid or could not be verified</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

@@ -1,0 +1,16 @@
+/Users/lucperin/IdeaProjects/Back-end-demo/src/main/java/com/gil/school/api/model/Course.java
+/Users/lucperin/IdeaProjects/Back-end-demo/src/main/java/com/gil/school/api/repository/CourseRepository.java
+/Users/lucperin/IdeaProjects/Back-end-demo/src/main/java/com/gil/school/api/services/SchoolService.java
+/Users/lucperin/IdeaProjects/Back-end-demo/src/main/java/com/gil/school/api/controller/rest/SchoolController.java
+/Users/lucperin/IdeaProjects/Back-end-demo/src/main/java/com/gil/school/api/configuration/OpenApiConfig.java
+/Users/lucperin/IdeaProjects/Back-end-demo/src/main/java/com/gil/school/api/GilApplication.java
+/Users/lucperin/IdeaProjects/Back-end-demo/src/main/java/com/gil/school/api/controller/graphql/CourseControllerGraph.java
+/Users/lucperin/IdeaProjects/Back-end-demo/src/main/java/com/gil/school/api/configuration/GlobalExceptionHandler.java
+/Users/lucperin/IdeaProjects/Back-end-demo/src/main/java/com/gil/school/api/controller/rest/CourseController.java
+/Users/lucperin/IdeaProjects/Back-end-demo/src/main/java/com/gil/school/api/model/Validators/Validators.java
+/Users/lucperin/IdeaProjects/Back-end-demo/src/main/java/com/gil/school/api/model/School.java
+/Users/lucperin/IdeaProjects/Back-end-demo/src/main/java/com/gil/school/api/services/CourseService.java
+/Users/lucperin/IdeaProjects/Back-end-demo/src/main/java/com/gil/school/api/model/Enumeration/CourseType.java
+/Users/lucperin/IdeaProjects/Back-end-demo/src/main/java/com/gil/school/api/repository/SchoolRepository.java
+/Users/lucperin/IdeaProjects/Back-end-demo/src/main/java/com/gil/school/api/model/Enumeration/CourseLanguage.java
+/Users/lucperin/IdeaProjects/Back-end-demo/src/main/java/com/gil/school/api/configuration/ApiError.java

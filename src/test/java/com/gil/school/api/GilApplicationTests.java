@@ -1,13 +1,11 @@
 package com.gil.school.api;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
 class GilApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+
 
 }

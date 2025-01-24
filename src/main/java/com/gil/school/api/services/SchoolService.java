@@ -1,11 +1,12 @@
 package com.gil.school.api.services;
+
+
 import com.gil.school.api.model.Course;
 import com.gil.school.api.model.School;
 import com.gil.school.api.repository.SchoolRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import java.util.*;
 
@@ -28,7 +29,7 @@ public class SchoolService {
         return  schoolRepository.findById(idSchool);
     }
 
-    public School updateSchool(School updatedSchool) {
+    public School updateSchool( School updatedSchool) {
         Long schoolId = updatedSchool.getSchool_id();
         if (schoolId != null && schoolRepository.existsById(schoolId)) {
             return schoolRepository.save(updatedSchool);
